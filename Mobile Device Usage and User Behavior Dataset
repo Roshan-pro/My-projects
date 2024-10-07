@@ -1,0 +1,39 @@
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the dataset
+data = pd.read_csv("C:/Users/rk186/OneDrive/Documents/user_behavior_dataset.csv")
+
+# Create a figure for the first set of subplots
+plt.figure(figsize=(12, 10))
+
+# First subplot
+plt.subplot(2, 1, 1)
+sns.swarmplot(data=data, x="Device Model", y="Screen On Time (hours/day)", hue="Battery Drain (mAh/day)", size=5)
+plt.title('Screen On Time by Device Model and Battery Drain')
+
+# Second subplot
+plt.subplot(2, 1, 2)
+sns.swarmplot(data=data, x="Operating System", y="Number of Apps Installed", hue="Gender", size=5)
+plt.title('Number of Apps Installed by Operating System and Gender')
+
+# Save the first figure with both subplots
+plt.tight_layout()
+plt.savefig("Roshan_plots.png", bbox_inches='tight')
+plt.close()  # Close the figure to free memory
+
+# Create a new figure for the KDE plot
+plt.figure(figsize=(6, 4))
+sns.kdeplot(data["Data Usage (MB/day)"], fill=True)
+plt.title('KDE of Data Usage (MB/day)')
+
+# Save the KDE plot
+plt.savefig("Roshan-1_usage.png", bbox_inches='tight')
+plt.close()  # Close the figure to free memory
+
+# Optionally show plots in interactive mode (comment out if not needed)
+plt.show()
+
+
